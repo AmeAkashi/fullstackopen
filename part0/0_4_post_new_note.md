@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
     participant browser
     participant server
@@ -39,3 +40,4 @@ sequenceDiagram
     activate server
     server-->>browser: HTTP/1.1 404 Not Found
     deactivate server
+```
