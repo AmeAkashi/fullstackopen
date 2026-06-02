@@ -1,7 +1,13 @@
+const Person = (props) => {
+    return (
+        <p>{props.name} {props.number}</p>
+    )
+}
+
 const Persons = ({ data }) => {
     return (
         <div>
-            {data.map(person => <p key={person.id}>{person.name} {person.number}</p>)}
+            {data.map(person => <Person key={person.id} name={person.name} number={person.number} />)}
         </div>
     )
 }

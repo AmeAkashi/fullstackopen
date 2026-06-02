@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import phonebook from './services/phonebook'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
@@ -11,11 +11,11 @@ const App = () => {
     const [namesToShow, setNamesToShow] = useState(persons)
 
     useEffect(() => {
-        axios
-            .get('http://localhost:3001/persons')
-            .then(response => {
-                setPersons(response.data)
-                setNamesToShow(response.data)
+        phonebook
+            .getAll()
+            .then(initialList => {
+                setPersons(initialList)
+                setNamesToShow(initialList)
             })
     }, [])
 
@@ -23,7 +23,7 @@ const App = () => {
         event.preventDefault()
 
         if (newName.trim() === '' || newNumber.trim() === '') {
-            alert('Both the name and the number field must be filled')
+            alert('Both the name and the number fields must be filled')
             return
         }
 
@@ -35,13 +35,17 @@ const App = () => {
         const newPerson = {
             name: newName,
             number: newNumber,
-            id: String(persons.length + 1)
         }
 
-        setPersons(persons.concat(newPerson))
-        setNamesToShow(persons.concat(newPerson))
-        setNewName('')
-        setNewNumber('')
+        phonebook
+            .create(newPerson)
+            .then(returnedData => {
+                const newContactList = persons.concat(returnedData)
+                setPersons(newContactList)
+                setNamesToShow(newContactList)
+                setNewName('')
+                setNewNumber('')
+            })
     }
 
     const handleChangeName = (event) => {

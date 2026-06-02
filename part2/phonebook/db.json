@@ -1,24 +1,70 @@
 {
-    "persons":[
-        { 
-            "name": "Arto Hellas", 
-            "number": "040-123456",
-            "id": "1"
-        },
-        { 
-            "name": "Ada Lovelace", 
-            "number": "39-44-5323523",
-            "id": "2"
-        },
-        { 
-            "name": "Dan Abramov", 
-            "number": "12-43-234345",
-            "id": "3"
-        },
-        { 
-            "name": "Mary Poppendieck", 
-            "number": "39-23-6423122",
-            "id": "4"
-        }
-    ]
+  "persons": [
+    {
+      "name": "Arto Hellas",
+      "number": "040-123456",
+      "id": "1"
+    },
+    {
+      "name": "Ada Lovelace",
+      "number": "39-44-5323523",
+      "id": "2"
+    },
+    {
+      "name": "Dan Abramov",
+      "number": "12-43-234345",
+      "id": "3"
+    },
+    {
+      "name": "Mary Poppendieck",
+      "number": "39-23-6423122",
+      "id": "4"
+    },
+    {
+      "name": "Ame Akashi",
+      "number": "590-35932",
+      "id": "feMJr1S_0mg"
+    },
+    {
+      "name": "Luna Lovegood",
+      "number": "580-3485915",
+      "id": "BdTVVjeFlH4"
+    },
+    {
+      "name": "Ada Wong",
+      "number": "654-4385340",
+      "id": "Yji-LLEwqG0"
+    },
+    {
+      "name": "Sarah Khan",
+      "number": "598-3591341",
+      "id": "8V6sBo3mMzU"
+    },
+    {
+      "name": "Venugopal Ayer",
+      "number": "593-593414",
+      "id": "JgapamrRzoo"
+    },
+    {
+      "name": "Ashfaq Ali",
+      "number": "904-5983403",
+      "id": "yQrvIgVhCtw"
+    },
+    {
+      "name": "Marin Kitagawa",
+      "number": "796-592340",
+      "id": "kp5HD0OsTbc"
+    },
+    {
+      "name": "Selim Akhtar",
+      "number": "594-513240",
+      "id": "xZksxHNKoFY"
+    },
+    {
+      "name": "Maria Sharapova",
+      "number": "674-5394213",
+      "id": "3H02oNhi2yU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
