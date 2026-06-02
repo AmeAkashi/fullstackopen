@@ -1,13 +1,28 @@
 const Person = (props) => {
     return (
-        <p>{props.name} {props.number}</p>
+        <p>
+            {props.name} {props.number} <button onClick={props.onClick}>delete</button>
+        </p>
     )
 }
 
-const Persons = ({ data }) => {
+const Persons = ({ data, handleDelete }) => {
+    const callBackFn = (name, id) => {
+        if (window.confirm(`Delete ${name}?`)) {
+            handleDelete(id)
+        }
+    }
+
     return (
         <div>
-            {data.map(person => <Person key={person.id} name={person.name} number={person.number} />)}
+            {data.map(person =>
+                <Person
+                    key={person.id}
+                    name={person.name}
+                    number={person.number}
+                    onClick={() => callBackFn(person.name, person.id)}
+                />
+            )}
         </div>
     )
 }

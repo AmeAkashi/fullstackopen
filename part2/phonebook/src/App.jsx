@@ -61,6 +61,16 @@ const App = () => {
         setNamesToShow(persons.filter(person => searchPattern.test(person.name.toLowerCase())))
     }
 
+    const deleteById = (id) => {
+        phonebook
+            .remove(id)
+            .then(() => {
+                const changedList = persons.filter(person => person.id !== id)
+                setPersons(changedList)
+                setNamesToShow(changedList)
+            })
+    }
+
     return (
         <div>
             <h2>Phonebook</h2>
@@ -74,7 +84,7 @@ const App = () => {
                 numberChange={handleChangeNumber}
             />
             <h3>Numbers</h3>
-            <Persons data={namesToShow} />
+            <Persons data={namesToShow} handleDelete={deleteById}/>
         </div>
     )
 }
