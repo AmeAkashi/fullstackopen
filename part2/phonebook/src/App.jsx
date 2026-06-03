@@ -19,6 +19,21 @@ const App = () => {
             })
     }, [])
 
+    const updateNumber = (contact) => {
+        const changedContact = { ...contact, number: newNumber }
+        phonebook
+            .update(contact.id, changedContact)
+            .then(returnedData => {
+                const changedList = persons.map(person =>
+                    person.id === contact.id ? returnedData : person
+                )
+                setPersons(changedList)
+                setNamesToShow(changedList)
+                setNewName('')
+                setNewNumber('')
+            })
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
 
@@ -27,8 +42,12 @@ const App = () => {
             return
         }
 
-        if (persons.some(person => person.name === newName)) {
-            alert(`${newName} is already added to phonebook`)
+        const contact = persons.find(person => person.name === newName)
+
+        if (contact !== undefined) {
+            if (window.confirm(`${newName} is already added to phonebook, replace old number with the new one?`)) {
+                updateNumber(contact)
+            }
             return
         }
 
@@ -40,9 +59,9 @@ const App = () => {
         phonebook
             .create(newPerson)
             .then(returnedData => {
-                const newContactList = persons.concat(returnedData)
-                setPersons(newContactList)
-                setNamesToShow(newContactList)
+                const changedList = persons.concat(returnedData)
+                setPersons(changedList)
+                setNamesToShow(changedList)
                 setNewName('')
                 setNewNumber('')
             })
