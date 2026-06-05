@@ -9,7 +9,7 @@ const Person = (props) => {
 const Persons = ({ data, handleDelete }) => {
     const callBackFn = (name, id) => {
         if (window.confirm(`Delete ${name}?`)) {
-            handleDelete(id)
+            handleDelete(id, name)
         }
     }
 

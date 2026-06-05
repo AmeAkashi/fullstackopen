@@ -3,12 +3,15 @@ import phonebook from './services/phonebook'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 const App = () => {
     const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
     const [namesToShow, setNamesToShow] = useState(persons)
+    const [message, setMessage] = useState(null)
+    const [errorMsg, setErrorMsg] = useState(null)
 
     useEffect(() => {
         phonebook
@@ -16,6 +19,10 @@ const App = () => {
             .then(initialList => {
                 setPersons(initialList)
                 setNamesToShow(initialList)
+            })
+            .catch(error => {
+                console.error(error)
+                setErrorMsg(`Could not connect to the database server!`)
             })
     }, [])
 
@@ -31,6 +38,23 @@ const App = () => {
                 setNamesToShow(changedList)
                 setNewName('')
                 setNewNumber('')
+                setMessage(`Updated ${contact.name}`)
+
+                setTimeout(() => {
+                    setMessage(null)
+                }, 5000)
+            })
+            .catch(error => {
+                console.error(error)
+                setErrorMsg(`Inforomation of ${contact.name} was already removed from the server`)
+
+                setTimeout(() => {
+                    setErrorMsg(null)
+                }, 5000)
+
+                const changedList = persons.filter(person => person.id !== contact.id)
+                setPersons(changedList)
+                setNamesToShow(changedList)
             })
     }
 
@@ -62,8 +86,22 @@ const App = () => {
                 const changedList = persons.concat(returnedData)
                 setPersons(changedList)
                 setNamesToShow(changedList)
+                setMessage(`Added ${newName}`)
+
+                setTimeout(() => {
+                    setMessage(null)
+                }, 5000)
+
                 setNewName('')
                 setNewNumber('')
+            })
+            .catch(error => {
+                console.error(error)
+                setErrorMsg(`Could not create a new entry at the moment`)
+
+                setTimeout(() => {
+                    setErrorMsg(null)
+                }, 5000)
             })
     }
 
@@ -80,10 +118,27 @@ const App = () => {
         setNamesToShow(persons.filter(person => searchPattern.test(person.name.toLowerCase())))
     }
 
-    const deleteById = (id) => {
+    const deleteById = (id, name) => {
         phonebook
             .remove(id)
             .then(() => {
+                const changedList = persons.filter(person => person.id !== id)
+                setPersons(changedList)
+                setNamesToShow(changedList)
+                setMessage(`Removed ${name}`)
+
+                setTimeout(() => {
+                    setMessage(null)
+                }, 5000)
+            })
+            .catch(error => {
+                console.error(error)
+                setErrorMsg(`Information of ${name} was already deleted from the server`)
+
+                setTimeout(() => {
+                    setErrorMsg(null)
+                }, 5000)
+
                 const changedList = persons.filter(person => person.id !== id)
                 setPersons(changedList)
                 setNamesToShow(changedList)
@@ -93,6 +148,7 @@ const App = () => {
     return (
         <div>
             <h2>Phonebook</h2>
+            <Notification message={message} error={errorMsg} />
             <Filter onChange={handleFilterChange} />
             <h3>Add new contact</h3>
             <PersonForm 

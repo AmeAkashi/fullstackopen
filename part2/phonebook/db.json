@@ -17,23 +17,18 @@
     },
     {
       "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
+      "number": "39-51-4349399",
       "id": "4"
     },
     {
       "name": "Ana Ivanovic",
-      "number": "650-6593092",
+      "number": "650-6593093",
       "id": "eS8bTMgPkfM"
     },
     {
       "name": "Dennis Bergkamp",
       "number": "21-69305533",
       "id": "QfACCo-J_k4"
-    },
-    {
-      "name": "Daniil Dubov",
-      "number": "340-5931413",
-      "id": "aRpKV9Ughcg"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
