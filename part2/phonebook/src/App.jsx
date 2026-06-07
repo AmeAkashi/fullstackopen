@@ -21,8 +21,7 @@ const App = () => {
                 setNamesToShow(initialList)
             })
             .catch(error => {
-                console.error(error)
-                setErrorMsg(`Could not connect to the database server!`)
+                setErrorMsg(error.message)
             })
     }, [])
 
@@ -45,8 +44,7 @@ const App = () => {
                 }, 5000)
             })
             .catch(error => {
-                console.error(error)
-                setErrorMsg(`Inforomation of ${contact.name} was already removed from the server`)
+                setErrorMsg(`Inforomation of ${contact.name} was already removed from the server: ${error.message}`)
 
                 setTimeout(() => {
                     setErrorMsg(null)
@@ -96,8 +94,7 @@ const App = () => {
                 setNewNumber('')
             })
             .catch(error => {
-                console.error(error)
-                setErrorMsg(`Could not create a new entry at the moment`)
+                setErrorMsg(error.message)
 
                 setTimeout(() => {
                     setErrorMsg(null)
@@ -132,8 +129,7 @@ const App = () => {
                 }, 5000)
             })
             .catch(error => {
-                console.error(error)
-                setErrorMsg(`Information of ${name} was already deleted from the server`)
+                setErrorMsg(error.message)
 
                 setTimeout(() => {
                     setErrorMsg(null)
